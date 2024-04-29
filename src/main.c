@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "include/token.h"
 
 int
 main(int argc, char *argv[])
