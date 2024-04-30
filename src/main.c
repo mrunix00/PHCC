@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "include/ast.h"
 #include "include/token.h"
 
 int
