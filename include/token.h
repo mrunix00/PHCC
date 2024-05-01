@@ -48,4 +48,15 @@ typedef struct {
 	size_t column;
 } token;
 
+typedef struct {
+	token *tokens;
+	size_t count;
+	size_t size;
+} token_list;
+
+token mk_token(const char *str, enum Token type, size_t line, size_t column);
+token_list mk_token_list(void);
+void token_list_push(token_list *, token);
+void token_list_free(token_list *);
+
 #endif
