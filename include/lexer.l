@@ -31,6 +31,10 @@ U32         { add_token(mk_token(yytext, TOKEN_U32, line, column)); }
 U64         { add_token(mk_token(yytext, TOKEN_U64, line, column)); }
 [(]         { add_token(mk_token(yytext, TOKEN_LEFT_PAREN, line, column)); }
 [)]         { add_token(mk_token(yytext, TOKEN_RIGHT_PAREN, line, column)); }
+[{]         { add_token(mk_token(yytext, TOKEN_LEFT_BRACE, line, column)); }
+[}]         { add_token(mk_token(yytext, TOKEN_RIGHT_BRACE, line, column)); }
+[\[]        { add_token(mk_token(yytext, TOKEN_LEFT_BRACKET, line, column)); }
+[\]]        { add_token(mk_token(yytext, TOKEN_RIGHT_BRACKET, line, column)); }
 break       { add_token(mk_token(yytext, TOKEN_BREAK, line, column)); }
 class       { add_token(mk_token(yytext, TOKEN_CLASS, line, column)); }
 continue    { add_token(mk_token(yytext, TOKEN_CONTINUE, line, column)); }
@@ -41,7 +45,12 @@ return      { add_token(mk_token(yytext, TOKEN_RETURN, line, column)); }
 switch      { add_token(mk_token(yytext, TOKEN_SWITCH, line, column)); }
 while       { add_token(mk_token(yytext, TOKEN_WHILE, line, column)); }
 
-.|\n { ECHO; }
+-?[0-9]+    { add_token(mk_token_i(yytext, line, column)); }
+-?[0-9]+\.[0-9]+    { add_token(mk_token_f(yytext, line, column)); }
+\"([^\\\"]|\\.)*\"  { add_token(mk_token_s(yytext, line, column)); }
+[A-Za-z_][A-Za-z0-9_]+  { add_token(mk_token(yytext, TOKEN_IDENTIFIER, line, column)); }
+
+.|\n        { column++; }
 
 %%
 

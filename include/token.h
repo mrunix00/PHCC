@@ -55,6 +55,9 @@ typedef struct {
 } token_list;
 
 token mk_token(const char *str, enum Token type, size_t line, size_t column);
+token mk_token_i(const char *str, size_t line, size_t column);
+token mk_token_f(const char *str, size_t line, size_t column);
+token mk_token_s(const char *str, size_t line, size_t column);
 token_list mk_token_list(void);
 void token_list_push(token_list *, token);
 void token_list_free(token_list *);

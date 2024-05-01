@@ -22,8 +22,22 @@ main(int argc, char *argv[])
 	tokens = lex(input);
 
 	printf("[");
-	for (i = 0; i < tokens.count; i++)
-		printf(" '%s',", tokens.tokens[i].data.string);
+	for (i = 0; i < tokens.count; i++) {
+		switch (tokens.tokens[i].type) {
+		case TOKEN_INTEGER:
+			printf(" %ld,", tokens.tokens[i].data.i_number);
+			break;
+		case TOKEN_FLOAT:
+			printf(" %f,", tokens.tokens[i].data.floating);
+			break;
+		case TOKEN_STRING:
+			printf(" \"%s\",", tokens.tokens[i].data.string);
+			break;
+		default:
+			printf(" '%s',", tokens.tokens[i].data.string);
+			break;
+		}
+	}
 	printf("\b ]\n");
 	return EXIT_SUCCESS;
 }
