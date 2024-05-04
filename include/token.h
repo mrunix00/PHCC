@@ -1,6 +1,7 @@
 #ifndef PHCC_TOKEN_H
 #define PHCC_TOKEN_H
 
+#include <stddef.h>
 #include <stdint.h>
 
 enum Token {

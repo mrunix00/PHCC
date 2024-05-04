@@ -90,3 +90,11 @@ lex(FILE *file) {
     yylex();
     return l_token_list;
 }
+
+token_list
+lex_string(const char *input) {
+    yy_scan_string(input);
+    l_token_list = mk_token_list();
+    yylex();
+    return l_token_list;
+}
