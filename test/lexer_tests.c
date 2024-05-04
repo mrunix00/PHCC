@@ -15,7 +15,7 @@ tearDown(void)
 }
 
 void
-test_lexer_single_line_comments(void)
+lex_ignore_single_line_comments(void)
 {
 	const char *input = "// This is just a comment";
 
@@ -26,7 +26,7 @@ test_lexer_single_line_comments(void)
 }
 
 void
-test_lexer_comment_at_the_end_of_line(void)
+lex_ignore_comment_at_the_end_of_line(void)
 {
 	const char *input = "U16 Var; // This is just a comment";
 
@@ -41,11 +41,25 @@ test_lexer_comment_at_the_end_of_line(void)
 	compare_token_lists(expected, actual);
 }
 
+void
+lex_ignore_multi_line_comments(void)
+{
+	const char *input = "//*"
+			    "This comment should be ignored"
+			    "*//";
+
+	token_list expected = mk_token_list();
+	token_list actual = lex_string(input);
+
+	compare_token_lists(expected, actual);
+}
+
 int
 main(void)
 {
 	UNITY_BEGIN();
-	RUN_TEST(test_lexer_single_line_comments);
-	RUN_TEST(test_lexer_comment_at_the_end_of_line);
+	RUN_TEST(lex_ignore_single_line_comments);
+	RUN_TEST(lex_ignore_comment_at_the_end_of_line);
+	RUN_TEST(lex_ignore_multi_line_comments);
 	return UNITY_END();
 }
