@@ -81,10 +81,3 @@ token_list_push(token_list *list, token t)
 	}
 	list->tokens[list->count++] = t;
 }
-
-void
-token_list_free(token_list *list)
-{
-	free(list->tokens);
-	memset(list, 0, sizeof(token_list));
-}

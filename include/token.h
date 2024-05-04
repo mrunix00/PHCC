@@ -13,7 +13,6 @@ enum Token {
 	TOKEN_INTEGER,
 	TOKEN_FLOAT,
 	TOKEN_STRING,
-	TOKEN_CHAR,
 	TOKEN_COMMA,
 	TOKEN_IDENTIFIER,
 	TOKEN_U0,
@@ -84,6 +83,5 @@ token mk_token_f(const char *str, size_t line, size_t column);
 token mk_token_s(const char *str, size_t line, size_t column);
 token_list mk_token_list(void);
 void token_list_push(token_list *, token);
-void token_list_free(token_list *);
 
 #endif
