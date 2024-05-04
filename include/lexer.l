@@ -74,7 +74,7 @@ while                       { add_token(mk_token(yytext, TOKEN_WHILE, line, colu
 -?[0-9]+                    { add_token(mk_token_i(yytext, line, column)); }
 -?[0-9]+\.[0-9]+            { add_token(mk_token_f(yytext, line, column)); }
 \"([^\\\"]|\\.)*\"          { add_token(mk_token_s(yytext, line, column)); }
-[A-Za-z_][A-Za-z0-9_]+      { add_token(mk_token(yytext, TOKEN_IDENTIFIER, line, column)); }
+[a-z_A-Z]+[a-z_A-Z0-9]*     { add_token(mk_token(yytext, TOKEN_IDENTIFIER, line, column)); }
 \/\/(.*)                    { /* ignore one line comments */ }
 "/*"([^*]|\*+[^*/])*\*+"/"  { /* ignore multi-line comments */ }
 
