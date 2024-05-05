@@ -43,7 +43,16 @@ for                         { add_token(mk_token(yytext, TOKEN_FOR, line, column
 if                          { add_token(mk_token(yytext, TOKEN_IF, line, column)); }
 return                      { add_token(mk_token(yytext, TOKEN_RETURN, line, column)); }
 switch                      { add_token(mk_token(yytext, TOKEN_SWITCH, line, column)); }
+case                        { add_token(mk_token(yytext, TOKEN_CASE, line, column)); }
+default                     { add_token(mk_token(yytext, TOKEN_DEFAULT, line, column)); }
+do                          { add_token(mk_token(yytext, TOKEN_DO, line, column)); }
+goto                        { add_token(mk_token(yytext, TOKEN_GOTO, line, column)); }
 while                       { add_token(mk_token(yytext, TOKEN_WHILE, line, column)); }
+throw                       { add_token(mk_token(yytext, TOKEN_THROW, line, column)); }
+try                         { add_token(mk_token(yytext, TOKEN_TRY, line, column)); }
+catch                       { add_token(mk_token(yytext, TOKEN_CATCH, line, column)); }
+static                      { add_token(mk_token(yytext, TOKEN_STATIC, line, column)); }
+public                      { add_token(mk_token(yytext, TOKEN_PUBLIC, line, column)); }
 
 =                           { add_token(mk_token(yytext, TOKEN_OP_ASSIGN, line, column)); }
 \+                          { add_token(mk_token(yytext, TOKEN_OP_ADD, line, column)); }

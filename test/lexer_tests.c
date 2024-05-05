@@ -59,7 +59,8 @@ lex_keywords(void)
 {
 	const char *input = "U0 U8 U16 U32 U64 I8 I16 I32 I64 F64 "
 			    "if switch for while break continue "
-			    "return class";
+			    "return class case default do goto "
+			    "throw try catch static public";
 
 	token_list expected = mk_token_list();
 	token_list actual = lex_string(input);
@@ -84,6 +85,16 @@ lex_keywords(void)
 
 	push_token(&expected, "return", TOKEN_RETURN);
 	push_token(&expected, "class", TOKEN_CLASS);
+	push_token(&expected, "case", TOKEN_CASE);
+	push_token(&expected, "default", TOKEN_DEFAULT);
+	push_token(&expected, "do", TOKEN_DO);
+	push_token(&expected, "goto", TOKEN_GOTO);
+
+	push_token(&expected, "throw", TOKEN_THROW);
+	push_token(&expected, "try", TOKEN_TRY);
+	push_token(&expected, "catch", TOKEN_CATCH);
+	push_token(&expected, "static", TOKEN_STATIC);
+	push_token(&expected, "public", TOKEN_PUBLIC);
 
 	compare_token_lists(expected, actual);
 }
