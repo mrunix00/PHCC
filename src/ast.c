@@ -1,7 +1,7 @@
-#include <malloc.h>
 #include <stdlib.h>
 
 #include "include/ast.h"
+#include "include/utils.h"
 
 ast_node *
 mk_ast_bin_op(token op, struct ast_node *left, struct ast_node *right)
@@ -12,11 +12,7 @@ mk_ast_bin_op(token op, struct ast_node *left, struct ast_node *right)
 	bin_op.left = left;
 	bin_op.right = right;
 
-	node = malloc(sizeof(ast_node));
-	if (node == NULL) {
-		fprintf(stderr, "[-] Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+	node = safe_malloc(sizeof(ast_node));
 	node->type = AST_BIN_OP;
 	node->data.bin_op = bin_op;
 
@@ -31,11 +27,7 @@ mk_ast_block(struct ast_node *statements, size_t count)
 	block.statements = statements;
 	block.count = count;
 
-	node = malloc(sizeof(ast_node));
-	if (node == NULL) {
-		fprintf(stderr, "[-] Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+	node = safe_malloc(sizeof(ast_node));
 	node->type = AST_BLOCK;
 	node->data.block = block;
 
@@ -51,11 +43,7 @@ mk_ast_func_decl(token name, ast_var_decl *args, size_t args_count)
 	func_decl.args = args;
 	func_decl.args_count = args_count;
 
-	node = malloc(sizeof(ast_node));
-	if (node == NULL) {
-		fprintf(stderr, "[-] Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+	node = safe_malloc(sizeof(ast_node));
 	node->type = AST_FUNC_DECL;
 	node->data.func_decl = func_decl;
 
@@ -70,11 +58,7 @@ mk_ast_func_def(ast_func_decl decl, ast_block body)
 	func_def.decl = decl;
 	func_def.body = body;
 
-	node = malloc(sizeof(ast_node));
-	if (node == NULL) {
-		fprintf(stderr, "[-] Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+	node = safe_malloc(sizeof(ast_node));
 	node->type = AST_FUNC_DEF;
 	node->data.func_def = func_def;
 
@@ -91,11 +75,7 @@ mk_ast_if(struct ast_node *condition, struct ast_node *body,
 	if_stmt.body = body;
 	if_stmt.else_body = else_body;
 
-	node = malloc(sizeof(ast_node));
-	if (node == NULL) {
-		fprintf(stderr, "[-] Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+	node = safe_malloc(sizeof(ast_node));
 	node->type = AST_IF;
 	node->data.if_stmt = if_stmt;
 
@@ -110,11 +90,7 @@ mk_ast_program(struct ast_node *statements, size_t count)
 	program.statements = statements;
 	program.count = count;
 
-	node = malloc(sizeof(ast_node));
-	if (node == NULL) {
-		fprintf(stderr, "[-] Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+	node = safe_malloc(sizeof(ast_node));
 	node->type = AST_PROGRAM;
 	node->data.program = program;
 
@@ -126,11 +102,7 @@ mk_ast_return(struct ast_node *expr)
 {
 	ast_node *node;
 
-	node = malloc(sizeof(ast_node));
-	if (node == NULL) {
-		fprintf(stderr, "[-] Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+	node = safe_malloc(sizeof(ast_node));
 	node->type = AST_RETURN;
 	node->data.ret = expr;
 
@@ -140,11 +112,7 @@ mk_ast_return(struct ast_node *expr)
 ast_node *
 mk_ast_type(token type)
 {
-	ast_node *node = malloc(sizeof(ast_node));
-	if (node == NULL) {
-		fprintf(stderr, "[-] Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+	ast_node *node = safe_malloc(sizeof(ast_node));
 
 	node->type = AST_TYPE;
 	node->data.type = type;
@@ -160,11 +128,7 @@ mk_ast_var_decl(struct ast_node *type, token name)
 	var_decl.type = type;
 	var_decl.name = name;
 
-	node = malloc(sizeof(ast_node));
-	if (node == NULL) {
-		fprintf(stderr, "[-] Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+	node = safe_malloc(sizeof(ast_node));
 	node->type = AST_VAR_DECL;
 	node->data.var_decl = var_decl;
 

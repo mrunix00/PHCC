@@ -12,7 +12,7 @@ LEXER_C = custom_target(
     command : [LEX_PROGRAM, '-o../autogen/@OUTPUT0@', '--header-file=../autogen/@OUTPUT1@', '@INPUT@', ],
 )
 
-SRCS = library('SRCS', 'src/ast.c', 'src/token.c')
+SRCS = library('SRCS', 'src/ast.c', 'src/token.c', 'src/utils.c')
 LEX = CC.find_library('l', required : true)
 PHCC = executable('PHCC', 'src/main.c', link_with : SRCS, dependencies : LEX, install : true)
 
