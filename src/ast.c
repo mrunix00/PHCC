@@ -103,11 +103,28 @@ mk_ast_if(struct ast_node *condition, struct ast_node *body,
 }
 
 ast_node *
+mk_ast_program(struct ast_node *statements, size_t count)
+{
+	ast_node *node;
+	ast_program program;
+	program.statements = statements;
+	program.count = count;
+
+	node = malloc(sizeof(ast_node));
+	if (node == NULL) {
+		fprintf(stderr, "[-] Memory allocation failed!\n");
+		exit(EXIT_FAILURE);
+	}
+	node->type = AST_PROGRAM;
+	node->data.program = program;
+
+	return node;
+}
+
+ast_node *
 mk_ast_return(struct ast_node *expr)
 {
 	ast_node *node;
-	ast_return ret;
-	ret.expr = expr;
 
 	node = malloc(sizeof(ast_node));
 	if (node == NULL) {
@@ -115,7 +132,7 @@ mk_ast_return(struct ast_node *expr)
 		exit(EXIT_FAILURE);
 	}
 	node->type = AST_RETURN;
-	node->data.ret = ret;
+	node->data.ret = expr;
 
 	return node;
 }
@@ -123,23 +140,20 @@ mk_ast_return(struct ast_node *expr)
 ast_node *
 mk_ast_type(token type)
 {
-	ast_node *node;
-	ast_type t;
-	t.name = type;
-
-	node = malloc(sizeof(ast_node));
+	ast_node *node = malloc(sizeof(ast_node));
 	if (node == NULL) {
 		fprintf(stderr, "[-] Memory allocation failed!\n");
 		exit(EXIT_FAILURE);
 	}
+
 	node->type = AST_TYPE;
-	node->data.type = t;
+	node->data.type = type;
 
 	return node;
 }
 
 ast_node *
-mk_ast_var_decl(ast_type type, token name)
+mk_ast_var_decl(struct ast_node *type, token name)
 {
 	ast_node *node;
 	ast_var_decl var_decl;

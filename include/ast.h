@@ -9,6 +9,7 @@ enum ast_node_type {
 	AST_FUNC_DECL,
 	AST_FUNC_DEF,
 	AST_IF,
+	AST_PROGRAM,
 	AST_RETURN,
 	AST_TYPE,
 	AST_VAR_DECL
@@ -28,11 +29,7 @@ typedef struct {
 } ast_block;
 
 typedef struct {
-	token name;
-} ast_type;
-
-typedef struct {
-	ast_type type;
+	struct ast_node *type;
 	token name;
 } ast_var_decl;
 
@@ -43,7 +40,7 @@ typedef struct {
 } ast_func_decl;
 
 typedef struct {
-	ast_type type;
+	struct ast_node *type;
 	ast_func_decl decl;
 	ast_block body;
 } ast_func_def;
@@ -55,8 +52,9 @@ typedef struct {
 } ast_if;
 
 typedef struct {
-	struct ast_node *expr;
-} ast_return;
+	struct ast_node *statements;
+	size_t count;
+} ast_program;
 
 typedef struct {
 	enum ast_node_type type;
@@ -66,8 +64,9 @@ typedef struct {
 		ast_func_decl func_decl;
 		ast_func_def func_def;
 		ast_if if_stmt;
-		ast_return ret;
-		ast_type type;
+		ast_program program;
+		struct ast_node *ret;
+		token type;
 		ast_var_decl var_decl;
 	} data;
 } ast_node;
@@ -79,8 +78,9 @@ ast_node *mk_ast_func_decl(token name, ast_var_decl *args, size_t args_count);
 ast_node *mk_ast_func_def(ast_func_decl decl, ast_block body);
 ast_node *mk_ast_if(struct ast_node *cond, struct ast_node *body,
     struct ast_node *else_body);
+ast_node *mk_ast_program(struct ast_node *stms, size_t count);
 ast_node *mk_ast_return(struct ast_node *expr);
 ast_node *mk_ast_type(token);
-ast_node *mk_ast_var_decl(ast_type type, token name);
+ast_node *mk_ast_var_decl(struct ast_node *type, token name);
 
 #endif
