@@ -124,7 +124,9 @@ lex_operators(void)
 {
 	const char *input = "= + - * / % ! && ||"
 			    "+= -= *= /= %= ++ --"
-			    "== != < > <= >=";
+			    "== != < > <= >="
+			    ">> << >>= <<= & | ^ ~"
+			    "&= |= ^= ~=";
 
 	token_list expected = mk_token_list();
 	token_list actual = lex_string(input);
@@ -153,6 +155,20 @@ lex_operators(void)
 	push_token(&expected, ">", TOKEN_OP_GT);
 	push_token(&expected, "<=", TOKEN_OP_LTE);
 	push_token(&expected, ">=", TOKEN_OP_GTE);
+
+	push_token(&expected, ">>", TOKEN_OP_RSHIFT);
+	push_token(&expected, "<<", TOKEN_OP_LSHIFT);
+	push_token(&expected, ">>=", TOKEN_OP_RSHIFT_ASSIGN);
+	push_token(&expected, "<<=", TOKEN_OP_LSHIFT_ASSIGN);
+	push_token(&expected, "&", TOKEN_OP_BIT_AND);
+	push_token(&expected, "|", TOKEN_OP_BIT_OR);
+	push_token(&expected, "^", TOKEN_OP_BIT_XOR);
+	push_token(&expected, "~", TOKEN_OP_BIT_NOT);
+
+	push_token(&expected, "&=", TOKEN_OP_BIT_AND_ASSIGN);
+	push_token(&expected, "|=", TOKEN_OP_BIT_OR_ASSIGN);
+	push_token(&expected, "^=", TOKEN_OP_BIT_XOR_ASSIGN);
+	push_token(&expected, "~=", TOKEN_OP_BIT_NOT_ASSIGN);
 
 	compare_token_lists(expected, actual);
 }

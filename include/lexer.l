@@ -76,7 +76,18 @@ public                      { add_token(mk_token(yytext, TOKEN_PUBLIC, line, col
 %=                          { add_token(mk_token(yytext, TOKEN_OP_MOD_ASSIGN, line, column)); }
 \+\+                        { add_token(mk_token(yytext, TOKEN_OP_INC, line, column)); }
 --                          { add_token(mk_token(yytext, TOKEN_OP_DEC, line, column)); }
-
+>>                          { add_token(mk_token(yytext, TOKEN_OP_RSHIFT, line, column)); }
+\<\<                        { add_token(mk_token(yytext, TOKEN_OP_LSHIFT, line, column)); }
+>>=                         { add_token(mk_token(yytext, TOKEN_OP_RSHIFT_ASSIGN, line, column)); }
+\<\<=                       { add_token(mk_token(yytext, TOKEN_OP_LSHIFT_ASSIGN, line, column)); }
+&                           { add_token(mk_token(yytext, TOKEN_OP_BIT_AND, line, column)); }
+\|                          { add_token(mk_token(yytext, TOKEN_OP_BIT_OR, line, column)); }
+\^                          { add_token(mk_token(yytext, TOKEN_OP_BIT_XOR, line, column)); }
+~                           { add_token(mk_token(yytext, TOKEN_OP_BIT_NOT, line, column)); }
+&=                          { add_token(mk_token(yytext, TOKEN_OP_BIT_AND_ASSIGN, line, column)); }
+\|=                         { add_token(mk_token(yytext, TOKEN_OP_BIT_OR_ASSIGN, line, column)); }
+\^=                          { add_token(mk_token(yytext, TOKEN_OP_BIT_XOR_ASSIGN, line, column)); }
+~=                          { add_token(mk_token(yytext, TOKEN_OP_BIT_NOT_ASSIGN, line, column)); }
 
 [,]                         { add_token(mk_token(yytext, TOKEN_COMMA, line, column)); }
 [;]                         { add_token(mk_token(yytext, TOKEN_SEMICOLON, line, column)); }
