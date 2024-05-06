@@ -1,3 +1,4 @@
 buildDir/
 .idea/
 autogen/*
+subprojects/unity
