@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "include/token.h"
-#include "utils.h"
+#include "include/utils.h"
 
 token
 mk_token(const char *str, enum Token type, size_t line, size_t column)

@@ -1,6 +1,7 @@
-project('PHCC', 'c',
-        version : '1.0.0',
-        default_options : ['warning_level=3', 'c_std=c89'])
+project(
+    'PHCC', 'c',
+    version : '1.0.0',
+    default_options : ['warning_level=3', 'c_std=c89'])
 CC = meson.get_compiler('c')
 LEX_PROGRAM = find_program('flex')
 
@@ -21,11 +22,8 @@ unity_dependency = unity_subproject.get_variable('unity_dep')
 unity_gen_runner = unity_subproject.get_variable('gen_test_runner')
 
 lexer_tests = executable('lexer_tests',
-                         sources : [
-                             files(['src' / 'token.c',
-                                    'test' / 'lexer_tests.c']),
-#                             unity_gen_runner.process('test' / 'lexer_tests.c')
-                         ],
+                         sources : [files(['test' / 'lexer_tests.c'])],
+                         link_with : SRCS,
                          include_directories : [include_directories('include')],
                          dependencies : [unity_dependency, LEX],
 )

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "include/ast.h"
+#include "include/utils.h"
 
 void
 panic(const char *msg)
