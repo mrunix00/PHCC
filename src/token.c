@@ -29,10 +29,21 @@ mk_token_i(const char *str, size_t line, size_t column)
 }
 
 token
+mk_token_u(const char *str, size_t line, size_t column)
+{
+	token t;
+	t.data.u_number = strtoul(str, NULL, 10);
+	t.type = TOKEN_UINTEGER;
+	t.line = line;
+	t.column = column;
+	return t;
+}
+
+token
 mk_token_f(const char *str, size_t line, size_t column)
 {
 	token t;
-	t.data.floating = strtod(str, NULL);
+	t.data.f_number = strtod(str, NULL);
 	t.type = TOKEN_FLOAT;
 	t.line = line;
 	t.column = column;

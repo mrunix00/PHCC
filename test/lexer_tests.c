@@ -201,8 +201,8 @@ lex_immediate_values(void)
 	token_list expected = mk_token_list();
 	token_list actual = lex_string(input);
 
-	push_token_i(&expected, "12");
-	push_token_i(&expected, "24");
+	push_token_u(&expected, "12");
+	push_token_u(&expected, "24");
 	push_token_i(&expected, "-36");
 	push_token_f(&expected, "3.1415");
 	push_token_f(&expected, "9.81");

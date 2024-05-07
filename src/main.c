@@ -28,7 +28,7 @@ main(int argc, char *argv[])
 			printf(" %ld,", tokens.tokens[i].data.i_number);
 			break;
 		case TOKEN_FLOAT:
-			printf(" %f,", tokens.tokens[i].data.floating);
+			printf(" %f,", tokens.tokens[i].data.f_number);
 			break;
 		case TOKEN_STRING:
 			printf(" \"%s\",", tokens.tokens[i].data.string);

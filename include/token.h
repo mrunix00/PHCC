@@ -12,6 +12,7 @@ enum Token {
 	TOKEN_RIGHT_BRACKET,
 	TOKEN_LEFT_BRACKET,
 	TOKEN_INTEGER,
+	TOKEN_UINTEGER,
 	TOKEN_FLOAT,
 	TOKEN_STRING,
 	TOKEN_COMMA,
@@ -87,7 +88,7 @@ typedef struct {
 		char *string;
 		int64_t i_number;
 		uint64_t u_number;
-		double floating;
+		double f_number;
 	} data;
 	size_t line;
 	size_t column;
@@ -101,6 +102,7 @@ typedef struct {
 
 token mk_token(const char *str, enum Token type, size_t line, size_t column);
 token mk_token_i(const char *str, size_t line, size_t column);
+token mk_token_u(const char *str, size_t line, size_t column);
 token mk_token_f(const char *str, size_t line, size_t column);
 token mk_token_s(const char *str, size_t line, size_t column);
 token_list mk_token_list(void);
